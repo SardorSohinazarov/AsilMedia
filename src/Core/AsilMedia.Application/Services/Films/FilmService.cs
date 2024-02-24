@@ -32,6 +32,8 @@ namespace AsilMedia.Application.Services.Films
                 FilmMakerId = filmDTO.FilmMakerId,
                 AgeRestriction = filmDTO.AgeRestriction,
                 PublishedYear = filmDTO.PublishedYear,
+                PhotoPath = filmDTO.PhotoPath,
+                VideoPath = filmDTO.VideoPath,
                 Genres = genres,
                 Actors = actors
             };
@@ -55,7 +57,9 @@ namespace AsilMedia.Application.Services.Films
                 Description = filmDTO.Description,
                 FilmMakerId = filmDTO.FilmMakerId,
                 AgeRestriction = filmDTO.AgeRestriction,
-                PublishedYear = filmDTO.PublishedYear
+                PublishedYear = filmDTO.PublishedYear,
+                PhotoPath = filmDTO.PhotoPath,
+                VideoPath = filmDTO.VideoPath,
             };
 
             var result = await _repository.UpdateFilmAsync(id, film);

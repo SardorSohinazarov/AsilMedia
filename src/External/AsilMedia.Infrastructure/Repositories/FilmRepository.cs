@@ -55,6 +55,8 @@ namespace AsilMedia.Infrastructure.Repositories
             storedFilm.AgeRestriction = film.AgeRestriction;
             storedFilm.FilmMakerId = film.FilmMakerId;
             storedFilm.PublishedYear = film.PublishedYear;
+            storedFilm.VideoPath = film.VideoPath;
+            storedFilm.PhotoPath = film.PhotoPath;
             storedFilm.UpdatedAt = DateTime.Now;
 
             var entry = _context.Update(storedFilm);

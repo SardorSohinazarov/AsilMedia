@@ -18,7 +18,8 @@ namespace AsilMedia.Application.Services.Actors
                 FirstName = actorDTO.FirstName,
                 LastName = actorDTO.LastName,
                 Description = actorDTO.Description,
-                Gender = actorDTO.Gender
+                Gender = actorDTO.Gender,
+                PhotoPath = actorDTO.PhotoPath,
             };
 
             var result = await _repository.InsertActorAsync(actor);
@@ -39,7 +40,8 @@ namespace AsilMedia.Application.Services.Actors
                 FirstName = actorDTO.FirstName,
                 LastName = actorDTO.LastName,
                 Description = actorDTO.Description,
-                Gender = actorDTO.Gender
+                Gender = actorDTO.Gender,
+                PhotoPath = actorDTO.PhotoPath,
             };
 
             var result = await _repository.UpdateActorAsync(id, actor);

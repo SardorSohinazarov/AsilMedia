@@ -54,6 +54,7 @@ namespace AsilMedia.Infrastructure.Repositories
             storedActor.FirstName = actor.FirstName;
             storedActor.LastName = actor.LastName;
             storedActor.Gender = actor.Gender;
+            storedActor.PhotoPath = actor.PhotoPath;
             storedActor.UpdatedAt = DateTime.Now;
 
             var entry = _context.Update(storedActor);

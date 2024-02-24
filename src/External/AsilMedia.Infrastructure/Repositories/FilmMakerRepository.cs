@@ -50,6 +50,7 @@ namespace AsilMedia.Infrastructure.Repositories
             storedFilmMaker.LastName = filmMaker.LastName;
             storedFilmMaker.Gender = filmMaker.Gender;
             storedFilmMaker.Description = filmMaker.Description;
+            storedFilmMaker.PhotoPath = filmMaker.PhotoPath;
             storedFilmMaker.UpdatedAt = DateTime.Now;
 
             var entry = _context.Update(storedFilmMaker);
@@ -72,5 +73,4 @@ namespace AsilMedia.Infrastructure.Repositories
             return entry.Entity;
         }
     }
-
 }

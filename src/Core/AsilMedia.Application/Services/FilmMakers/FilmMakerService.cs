@@ -18,7 +18,8 @@ namespace AsilMedia.Application.Services.FilmMakers
                 FirstName = filmMakerDTO.FirstName,
                 LastName = filmMakerDTO.LastName,
                 Description = filmMakerDTO.Description,
-                Gender = filmMakerDTO.Gender
+                Gender = filmMakerDTO.Gender,
+                PhotoPath = filmMakerDTO.PhotoPath,
             };
 
             var result = await _repository.InsertFilmMakerAsync(filmMaker);
@@ -39,7 +40,8 @@ namespace AsilMedia.Application.Services.FilmMakers
                 FirstName = filmMakerDTO.FirstName,
                 LastName = filmMakerDTO.LastName,
                 Description = filmMakerDTO.Description,
-                Gender = filmMakerDTO.Gender
+                Gender = filmMakerDTO.Gender,
+                PhotoPath = filmMakerDTO.PhotoPath,
             };
 
             var result = await _repository.UpdateFilmMakerAsync(id, filmMaker);

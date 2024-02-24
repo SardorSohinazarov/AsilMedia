@@ -8,5 +8,6 @@ namespace AsilMedia.Application.DataTransferObjects.Actors
         public string LastName { get; set; }
         public string Description { get; set; }
         public Gender Gender { get; set; }
+        public string? PhotoPath { get; set; }
     }
 }
