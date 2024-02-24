@@ -1,15 +1,12 @@
-﻿using AsilMedia.Domain.Common;
-using AsilMedia.Domain.Enums;
+﻿using AsilMedia.Domain.Enums;
 
-namespace AsilMedia.Domain.Entities
+namespace AsilMedia.Application.DataTransferObjects.FilmMakers
 {
-    public class FilmMaker : Auditable
+    public class FilmMakerCreationDTO
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Description { get; set; }
         public Gender Gender { get; set; }
-
-        public List<Film>? Films { get; set; }
     }
 }

@@ -10,6 +10,6 @@ namespace AsilMedia.Domain.Entities
         public string Description { get; set; }
         public Gender Gender { get; set; }
 
-        public List<Film> Films { get; set; }
+        public List<Film>? Films { get; set; }
     }
 }
