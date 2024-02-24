@@ -1,0 +1,57 @@
+﻿@using AsilMedia.Domain.Entities
+@model Film
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="film-full">
+    <h1>@Model.Title</h1>
+    <div class="row">
+        <div class="col-3">
+            <img src=@Model.PhotoPath class="card-img-top" alt="..." style="width:200px; height:300px">
+        </div>
+        <div class="col-9">
+            <p>@Model.Description</p>
+            <div class="row">
+                <div class="col">
+                    Genres:
+                    @foreach (var genre in Model.Genres)
+                    {
+                        <a href=@genre.Name>@genre.Name</a>
+                        <span>,</span>
+                    }
+                    <br />
+
+                    Actors:
+                    @foreach (var actor in Model.Actors)
+                    {
+                        <a href=@actor.PhotoPath>@actor.FirstName @actor.LastName</a>
+                        <span>,</span>
+                    }
+                </div>
+                <div class="col">
+                    FilmMaker:
+                    <a href=@Model.FilmMaker.PhotoPath>@Model.FilmMaker.FirstName @Model.FilmMaker.FirstName</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    @{
+        var link = Model.VideoPath.Replace("//youtu.be/", "//www.youtube.com/embed/");
+        <iframe width="560" height="315" src="@link" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    }
+</div>
+
+
+<style>
+    .film-full{
+        width: 80%;
+        margin: auto;
+    }
+</style>
