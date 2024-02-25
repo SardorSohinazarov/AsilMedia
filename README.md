@@ -1,6 +1,6 @@
 # AsilMedia
 
-http://asilmedia.org
+Clone of http://asilmedia.org
 
 Project oddiy WebApi ko'rinishida quriladi.
 Keyinchalik MVC qo'shamiz.
