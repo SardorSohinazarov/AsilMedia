@@ -10,5 +10,6 @@ namespace AsilMedia.Infrastructure1
             => Database.Migrate();
 
         public DbSet<Film> Films { get; set; }
+        public DbSet<Genre> Genres { get; set; }
     }
 }
