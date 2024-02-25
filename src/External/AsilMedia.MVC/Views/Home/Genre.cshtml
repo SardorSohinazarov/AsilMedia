@@ -1,0 +1,48 @@
+﻿@using AsilMedia.Domain.Entities
+@model Genre
+
+@{
+    ViewData["Title"] = "Search:" + Model.Name;
+}
+
+<div class="film-full">
+    <h1>
+        <span>   
+            Searching genre:   
+        </span>
+        @Model.Name
+    </h1>
+
+    <br />
+    <br />
+    <br />
+    Films:
+    <br />
+    <div class="d-flex align-content-start flex-wrap">
+        @foreach (var film in Model.Films)
+        {
+            <a asp-controller="Home" asp-action="Film" asp-route-id="@film.Id" class="card m-1" style="width: 150px">
+                <img src=@film.PhotoPath class="card-img-top" alt="..." style="width:150px; height:250px">
+                <div class="card-body">
+                    <p class="card-text">
+                        @film.Title
+                    </p>
+                    <p class="card-text">
+                        @film.Description
+                    </p>
+                    <p class="card-text">
+                        @film.AgeRestriction
+                    </p>
+                </div>
+            </a>
+        }
+    </div>
+</div>
+
+
+<style>
+    .film-full {
+        width: 80%;
+        margin: auto;
+    }
+</style>

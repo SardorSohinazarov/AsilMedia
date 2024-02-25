@@ -22,8 +22,8 @@ namespace AsilMedia.Infrastructure.Repositories
         public async ValueTask<FilmMaker> SelectFilmMakerByIdAsync(long id)
         {
             var storedFilmMaker = await _context.FilmMakers
-                .AsNoTracking()
                 .Include(x => x.Films)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (storedFilmMaker == null)
@@ -35,7 +35,6 @@ namespace AsilMedia.Infrastructure.Repositories
         public async ValueTask<List<FilmMaker>> SelectAllFilmMakersAsync()
             => await _context.FilmMakers
                 .AsNoTracking()
-                .Include(x => x.Films)
                 .ToListAsync();
 
         public async ValueTask<FilmMaker> UpdateFilmMakerAsync(long id, FilmMaker filmMaker)

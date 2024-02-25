@@ -22,6 +22,7 @@ namespace AsilMedia.Infrastructure.Repositories
         public async ValueTask<Actor> SelectActorByIdAsync(long id)
         {
             var storedActor = await _context.Actors
+                .Include(x => x.Films)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == id);
 

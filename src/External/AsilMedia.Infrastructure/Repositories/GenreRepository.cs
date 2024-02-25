@@ -22,6 +22,7 @@ namespace AsilMedia.Infrastructure.Repositories
         public async ValueTask<Genre> SelectGenreByIdAsync(long id)
         {
             var storedGenre = await _context.Genres
+                .Include(x => x.Films)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == id);
 

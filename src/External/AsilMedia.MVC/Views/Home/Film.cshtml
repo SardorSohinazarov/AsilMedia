@@ -18,7 +18,7 @@
                     Genres:
                     @foreach (var genre in Model.Genres)
                     {
-                        <a href=@genre.Name>@genre.Name</a>
+                        <a asp-controller="Home" asp-action="Genre" asp-route-id="@genre.Id">@genre.Name</a>
                         <span>,</span>
                     }
                     <br />
@@ -26,13 +26,13 @@
                     Actors:
                     @foreach (var actor in Model.Actors)
                     {
-                        <a href=@actor.PhotoPath>@actor.FirstName @actor.LastName</a>
+                        <a asp-controller="Home" asp-action="Actor" asp-route-id="@actor.Id">@actor.FirstName @actor.LastName</a>
                         <span>,</span>
                     }
                 </div>
                 <div class="col">
                     FilmMaker:
-                    <a href=@Model.FilmMaker.PhotoPath>@Model.FilmMaker.FirstName @Model.FilmMaker.FirstName</a>
+                    <a asp-controller="Home" asp-action="FilmMaker" asp-route-id="@Model.FilmMakerId">@Model.FilmMaker.FirstName @Model.FilmMaker.LastName</a>
                 </div>
             </div>
         </div>
