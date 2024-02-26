@@ -14,19 +14,9 @@ namespace AsilMedia.Infrastructure.Repositories
         public GenreRespoitory(ApplicationDbContext dbContext)
             => _dbContext = dbContext;
 
-        public async Task<Genre> DeleteAsync(long id)
+        public async Task<Genre> InsertAsync(Genre genre)
         {
-            var model = await _dbContext.Genres.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (model is null)
-                throw new GenreNotFoundException();
-
-            return model;
-        }
-
-        public async Task<Genre> InsertAsync(Genre gen)
-        {
-            EntityEntry<Genre> entry = await _dbContext.Genres.AddAsync(gen);
+            EntityEntry<Genre> entry = await _dbContext.Genres.AddAsync(genre);
             await _dbContext.SaveChangesAsync();
 
             return entry.Entity;
@@ -45,16 +35,29 @@ namespace AsilMedia.Infrastructure.Repositories
             return model;
         }
 
-        public async Task<Genre> UpdateAsync(Genre gen, long id)
+        public async Task<Genre> UpdateAsync(Genre genre, long id)
         {
-            var model = await _dbContext.Genres.FirstOrDefaultAsync(x => x.Id == id);
+            var storedGenre = await _dbContext.Genres.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (model is null)
+            if (storedGenre is null)
                 throw new GenreNotFoundException();
 
-            model.Name = gen.Name;
+            storedGenre.Name = genre.Name;
 
-            EntityEntry<Genre> entry = _dbContext.Genres.Update(model);
+            EntityEntry<Genre> entry = _dbContext.Genres.Update(storedGenre);
+            await _dbContext.SaveChangesAsync();
+
+            return entry.Entity;
+        }
+
+        public async Task<Genre> DeleteAsync(long id)
+        {
+            var storedGenre = await _dbContext.Genres.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (storedGenre is null)
+                throw new GenreNotFoundException();
+
+            var entry = _dbContext.Remove(storedGenre);
             await _dbContext.SaveChangesAsync();
 
             return entry.Entity;

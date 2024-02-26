@@ -11,5 +11,7 @@ namespace AsilMedia.Infrastructure1
 
         public DbSet<Film> Films { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<FilmMaker> FilmMakers { get; set; }
+        public DbSet<Actor> Actors { get; set; }
     }
 }

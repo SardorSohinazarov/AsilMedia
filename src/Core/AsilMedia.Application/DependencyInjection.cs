@@ -1,4 +1,4 @@
-﻿using AsilMedia.Application.Services.Actors;
+﻿using AsilMedia.Application.Services.Genres;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AsilMedia.Application
@@ -7,8 +7,7 @@ namespace AsilMedia.Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped<IActorService, ActorService>();
-            //davom etamiz
+            services.AddScoped<IGenreService, GenreService>();
 
             return services;
         }
