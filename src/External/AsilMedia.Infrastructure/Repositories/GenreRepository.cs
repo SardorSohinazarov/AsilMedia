@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace AsilMedia.Infrastructure.Repositories
 {
-    public class GenreRespoitory : IGenreRepository
+    public class GenreRepository : IGenreRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public GenreRespoitory(ApplicationDbContext dbContext)
+        public GenreRepository(ApplicationDbContext dbContext)
             => _dbContext = dbContext;
 
         public async Task<Genre> DeleteAsync(long id)
