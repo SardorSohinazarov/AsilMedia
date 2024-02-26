@@ -13,11 +13,14 @@ namespace AsilMedia.Infrastructure.Repositories
 
         public GenreRespoitory(ApplicationDbContext dbContext)
             => _dbContext = dbContext;
+
         public async Task<Genre> DeleteAsync(long id)
         {
             var model = await _dbContext.Genres.FirstOrDefaultAsync(x => x.Id == id);
+
             if (model is null)
                 throw new GenreNotFoundException();
+
             return model;
         }
 
@@ -25,6 +28,7 @@ namespace AsilMedia.Infrastructure.Repositories
         {
             EntityEntry<Genre> entry = await _dbContext.Genres.AddAsync(gen);
             await _dbContext.SaveChangesAsync();
+
             return entry.Entity;
         }
 
@@ -34,19 +38,21 @@ namespace AsilMedia.Infrastructure.Repositories
         public async Task<Genre> SelectByIdAsync(long id)
         {
             var model = await _dbContext.Genres.FirstOrDefaultAsync(x => x.Id == id);
+
             if (model is null)
                 throw new GenreNotFoundException();
+
             return model;
         }
 
         public async Task<Genre> UpdateAsync(Genre gen, long id)
         {
             var model = await _dbContext.Genres.FirstOrDefaultAsync(x => x.Id == id);
+
             if (model is null)
                 throw new GenreNotFoundException();
 
             model.Name = gen.Name;
-            model.Films = gen.Films;
 
             EntityEntry<Genre> entry = _dbContext.Genres.Update(model);
             await _dbContext.SaveChangesAsync();
