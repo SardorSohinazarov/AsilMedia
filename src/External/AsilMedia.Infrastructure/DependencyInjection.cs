@@ -17,7 +17,6 @@ namespace AsilMedia.Infrastructure1
                 options.UseNpgsql(configuration.GetConnectionString("Postgress")));
 
             services.AddScoped<IFilmRepository, FilmRepository>();
-
             services.AddScoped<IGenreRepository, GenreRespoitory>();
 
             return services;
