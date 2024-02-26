@@ -8,5 +8,6 @@ namespace AsilMedia.Application.Services.Genres
 {
     public interface IGenreService
     {
+        
     }
 }
