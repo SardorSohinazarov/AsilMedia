@@ -1,33 +1,31 @@
-﻿
-using AsilMedia.Application.Abstractions.Repositories;
-using AsilMedia.Domain.Entities;
-using AsilMedia.Domain.Exceptions.Films;
+﻿using AsilMedia.Domain.Entities;
+using AsilMedia.Infrastructure1;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace AsilMedia.Infrastructure1.Repositories
+namespace AsilMedia.Infrastructure.Repositories
 {
-    public class FilmRepository : IFilmRepository
+    public class ActorRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public FilmRepository(ApplicationDbContext dbContext)
+        public ActorRepository(ApplicationDbContext dbContext)
             => _dbContext = dbContext;
 
-        public async Task<Film> InsertAsync(Film film)
+        public async Task<Actor> InsertAsync(Actor acotr)
         {
-            EntityEntry<Film> entry = await _dbContext.AddAsync(film);
+            EntityEntry<Actor> entry = await _dbContext.AddAsync(acotr);
             await _dbContext.SaveChangesAsync();
 
             return entry.Entity;
         }
 
-        public async Task<List<Film>> SelectAllAsync()
-            => await _dbContext.Films.ToListAsync();
+        public async Task<List<Actor>> SelectAllAsync()
+            => await _dbContext.Actors.ToListAsync();
 
-        public async Task<Film> SelectByIdAsync(long id)
+        public async Task<Actor> SelectByIdAsync(long id)
         {
-            var storedFilm = await _dbContext.Films.FirstOrDefaultAsync(x => x.Id == id);
+            var storedFilm = await _dbContext.Actors.FirstOrDefaultAsync(x => x.Id == id);
 
             if (storedFilm is null)
                 throw new FilmNotFoundException();
@@ -35,16 +33,16 @@ namespace AsilMedia.Infrastructure1.Repositories
             return storedFilm;
         }
 
-        public async Task<Film> UpdateAsync(Film film, long id)
+        public async Task<Film> UpdateAsync(ActorDTO actor, long id)
         {
-            var storedFilm = await _dbContext.Films.FirstOrDefaultAsync(x => x.Id == id);
+            var storedFilm = await _dbContext.Actors.FirstOrDefaultAsync(x => x.Id == id);
 
             if (storedFilm is null)
                 throw new FilmNotFoundException();
 
             //mapping
-            storedFilm.Title = film.Title;
-            storedFilm.Description = film.Description;
+            storedFilm.FirstName = actor.FirstName;
+            storedFilm. = actor.Description;
             ///...
 
             var entry = _dbContext.Update(storedFilm);

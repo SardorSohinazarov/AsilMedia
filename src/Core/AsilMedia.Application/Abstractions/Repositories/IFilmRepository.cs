@@ -1,4 +1,8 @@
-﻿using AsilMedia.Domain.Entities;
+﻿
+
+
+
+using AsilMedia.Domain.Entities;
 
 namespace AsilMedia.Application.Abstractions.Repositories
 {

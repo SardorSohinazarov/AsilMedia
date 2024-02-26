@@ -17,7 +17,7 @@ namespace AsilMedia.Application.Services.Films
             {
                 Title = filmDTO.Title,
                 AgeRestriction = filmDTO.AgeRestriction,
-
+               
                 ///...
             };
 
