@@ -7,18 +7,36 @@ namespace AsilMedia.Application.Services.Films
     public class FilmService : IFilmService
     {
         private readonly IFilmRepository _filmRepository;
+        private readonly IActorRepository _actorRepository;
+        private readonly IGenreRepository _genreRepository;
 
-        public FilmService(IFilmRepository filmRepository)
-            => _filmRepository = filmRepository;
+        public FilmService(
+            IFilmRepository filmRepository,
+            IActorRepository actorRepository,
+            IGenreRepository genreRepository)
+        {
+            _filmRepository = filmRepository;
+            _actorRepository = actorRepository;
+            _genreRepository = genreRepository;
+        }
 
         public async Task<Film> InsertAsync(FilmDTO filmDTO)
         {
+            var actors = await _actorRepository.SelectAllAsync(filmDTO.Actors);
+            var genres = await _genreRepository.SelectAllAsync(filmDTO.Genres);
+
             var film = new Film()
             {
                 Title = filmDTO.Title,
                 AgeRestriction = filmDTO.AgeRestriction,
-               
-                ///...
+                Description = filmDTO.Description,
+                FilmMakerId = filmDTO.FilmMakerId,
+                VideoPath = filmDTO.VideoPath,
+                PhotoPath = filmDTO.PhotoPath,
+                PublishedYear = filmDTO.PublishedYear,
+
+                Actors = actors,
+                Genres = genres
             };
 
             film = await _filmRepository.InsertAsync(film);
