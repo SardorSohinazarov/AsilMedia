@@ -23,11 +23,11 @@ namespace AsilMedia.Infrastructure.Repositories
         }
 
         public async Task<List<Actor>> SelectAllAsync()
-            => await _dbContext.Actors.ToListAsync();
+            => await _dbContext.Actors.Include(x => x.Films).ToListAsync();
 
         public async Task<Actor> SelectByIdAsync(long id)
         {
-            var storedFilm = await _dbContext.Actors.FirstOrDefaultAsync(x => x.Id == id);
+            var storedFilm = await _dbContext.Actors.Include(x => x.Films).FirstOrDefaultAsync(x => x.Id == id);
 
             if (storedFilm is null)
                 throw new FilmNotFoundException();
