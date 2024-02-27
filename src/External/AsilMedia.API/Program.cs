@@ -18,6 +18,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IFilmRepository, FilmRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRespoitory>();
+builder.Services.AddScoped<IFilmMakerRepository, FilmMakerRepository>();
+builder.Services.AddScoped<IActorRepository, ActorRepository>();
 
 var app = builder.Build();
 

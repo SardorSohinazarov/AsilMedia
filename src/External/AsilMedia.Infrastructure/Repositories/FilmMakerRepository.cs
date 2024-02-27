@@ -1,16 +1,10 @@
 using AsilMedia.Application.Abstractions.Repositories;
-using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Domain.Entities;
 using AsilMedia.Domain.Exceptions.FilmMakers;
 using AsilMedia.Domain.Exceptions.Films;
 using AsilMedia.Infrastructure1;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AsilMedia.Infrastructure.Repositories
 {

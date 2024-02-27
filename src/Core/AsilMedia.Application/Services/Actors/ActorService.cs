@@ -1,26 +1,24 @@
 ﻿using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Domain.Entities;
-using AsilMedia.Domain.Enums;
 
 namespace AsilMedia.Application.Services.Actors
 {
     public class ActorService : IActorService
     {
-        private readonly IActorRepository  _actorService;
-        public ActorService(IActorRepository actorService)
-        {
-            _actorService = actorService;
-        }
+        private readonly IActorRepository _actorRepository;
+
+        public ActorService(IActorRepository actorRepository)
+            => _actorRepository = actorRepository;
 
         public async Task<Actor> DeleteAsync(long id)
-        => await _actorService.DeleteActorAsync(id);
+            => await _actorRepository.DeleteAsync(id);
 
         public async Task<List<Actor>> SelectAllAsync()
-        => await _actorService.GetActorAsync();
+            => await _actorRepository.SelectAllAsync();
 
         public async Task<Actor> SelectByIdAsync(long id)
-        => await _actorService.GetActorsByIdAsync(id);
+            => await _actorRepository.SelectByIdAsync(id);
 
         public async Task<Actor> InsertAsync(ActorDTO actorDTO)
         {
@@ -33,7 +31,8 @@ namespace AsilMedia.Application.Services.Actors
                 Gender = actorDTO.Gender
 
             };
-            return await _actorService.CreateActorAsync(actor);
+
+            return await _actorRepository.InsertAsync(actor);
         }
 
         public async Task<Actor> UpdateAsync(ActorDTO actorDTO, long id)
@@ -47,7 +46,7 @@ namespace AsilMedia.Application.Services.Actors
                 Gender = actorDTO.Gender
 
             };
-            return await _actorService.UpdateActorAsync(actor,id);
+            return await _actorRepository.UpdateAsync(actor, id);
         }
     }
 }

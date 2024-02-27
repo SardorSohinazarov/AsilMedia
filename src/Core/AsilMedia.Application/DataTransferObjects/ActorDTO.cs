@@ -1,3 +1,4 @@
+using AsilMedia.Domain.Entities;
 using AsilMedia.Domain.Enums;
 
 namespace AsilMedia.Application.DataTransferObjects
@@ -9,6 +10,7 @@ namespace AsilMedia.Application.DataTransferObjects
         public string Description { get; set; }
         public Gender Gender { get; set; }
         public string PhotoPath { get; set; }
+
         public List<Film> Films { get; set; }
     }
 }

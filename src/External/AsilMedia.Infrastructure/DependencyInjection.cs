@@ -19,6 +19,7 @@ namespace AsilMedia.Infrastructure1
             services.AddScoped<IFilmRepository, FilmRepository>();
             services.AddScoped<IGenreRepository, GenreRespoitory>();
             services.AddScoped<IActorRepository, ActorRepository>();
+            services.AddScoped<IFilmMakerRepository, FilmMakerRepository>();
 
             return services;
         }

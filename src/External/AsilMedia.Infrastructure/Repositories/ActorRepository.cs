@@ -1,6 +1,7 @@
 using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Domain.Entities;
 using AsilMedia.Domain.Exceptions.Actors;
+using AsilMedia.Domain.Exceptions.Films;
 using AsilMedia.Infrastructure1;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -50,14 +51,14 @@ namespace AsilMedia.Infrastructure.Repositories
             return entry.Entity;
         }
 
-        public async Task<Film> DeleteAsync(long id)
+        public async Task<Actor> DeleteAsync(long id)
         {
-            var storedFilm = await _dbContext.Films.FirstOrDefaultAsync(x => x.Id == id);
+            var storedActor = await _dbContext.Actors.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (storedFilm is null)
-                throw new FilmNotFoundException();
+            if (storedActor is null)
+                throw new ActorNotFoundException();
 
-            var entry = _dbContext.Remove(storedFilm);
+            var entry = _dbContext.Remove(storedActor);
             await _dbContext.SaveChangesAsync();
 
             return entry.Entity;
