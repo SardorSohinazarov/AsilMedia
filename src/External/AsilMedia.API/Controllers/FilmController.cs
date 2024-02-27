@@ -7,11 +7,11 @@ namespace AsilMedia.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class FilmsController : ControllerBase
+    public class FilmController : ControllerBase
     {
         private readonly IFilmService _filmService;
 
-        public FilmsController(IFilmService filmService)
+        public FilmController(IFilmService filmService)
         {
             this._filmService = filmService;
         }
