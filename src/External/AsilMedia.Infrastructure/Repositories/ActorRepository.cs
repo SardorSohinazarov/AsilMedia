@@ -63,5 +63,8 @@ namespace AsilMedia.Infrastructure.Repositories
 
             return entry.Entity;
         }
+
+        public async Task<List<Actor>> SelectAllAsync(List<long> ids)
+            => await _dbContext.Actors.Where(x => ids.Contains(x.Id)).ToListAsync();
     }
 }
