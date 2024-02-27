@@ -11,20 +11,20 @@ namespace AsilMedia.Infrastructure.Repositories
     public class FilmMakerRepository : IFilmMakerRepository
     {
         private readonly ApplicationDbContext _dbContext;
-
-        public FilmMakerRepository(ApplicationDbContext _dbContext)
-            => _dbContext = _dbContext;
-
+        public FilmMakerRepository(ApplicationDbContext dbContext)
+            => _dbContext = dbContext;
 
         public async Task<FilmMaker> DeleteAsync(long id)
         {
             var filmMaker = await _dbContext.FilmMakers.FirstOrDefaultAsync(x => x.Id == id);
+
             if (filmMaker is null)
                 throw new FilmMakerNotFoundException();
+
             var entry = _dbContext.FilmMakers.Remove(filmMaker);
             await _dbContext.SaveChangesAsync();
-            return entry.Entity;
 
+            return entry.Entity;
         }
 
         public async Task<FilmMaker> InsertAsync(FilmMaker filmMaker)
@@ -36,13 +36,16 @@ namespace AsilMedia.Infrastructure.Repositories
         }
 
         public async Task<List<FilmMaker>> SelectAllAsync()
-            => await _dbContext.FilmMakers.ToListAsync();
+            => await _dbContext.FilmMakers
+                .Include(x => x.Films)
+                .ToListAsync();
 
 
         public async Task<FilmMaker> SelectByIdAsync(long id)
         {
-            var filmMaker = await _dbContext.FilmMakers.FirstOrDefaultAsync(x => x.Id == id);
-
+            var filmMaker = await _dbContext.FilmMakers
+                .Include(x => x.Films)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (filmMaker is null)
                 throw new FilmNotFoundException();

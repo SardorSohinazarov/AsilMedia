@@ -1,6 +1,5 @@
 ﻿using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Application.Services.FilmMakers;
-using AsilMedia.Application.Services.Genres;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsilMedia.API.Controllers
@@ -9,8 +8,7 @@ namespace AsilMedia.API.Controllers
     [ApiController]
     public class FilmMakerController : ControllerBase
     {
-        private readonly IFilmMakerService _filmMakerService
-            ;
+        private readonly IFilmMakerService _filmMakerService;
 
         public FilmMakerController(IFilmMakerService filmMakerService)
             => _filmMakerService = filmMakerService;
@@ -18,41 +16,41 @@ namespace AsilMedia.API.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync(FilmMakerDTO filmMakerDTO)
         {
-            var gerne = await _filmMakerService.InsertAsync(filmMakerDTO);
+            var filmMaker = await _filmMakerService.InsertAsync(filmMakerDTO);
 
-            return Ok(gerne);
+            return Ok(filmMaker);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var genres = await _filmMakerService.SelectAllAsync();
+            var filmMakers = await _filmMakerService.SelectAllAsync();
 
-            return Ok(genres);
+            return Ok(filmMakers);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetByIdAsync(long id)
         {
-            var genre = await _filmMakerService.SelectByIdAsync(id);
+            var filmMaker = await _filmMakerService.SelectByIdAsync(id);
 
-            return Ok(genre);
+            return Ok(filmMaker);
         }
 
         [HttpPut]
         public async Task<IActionResult> PutAsync(FilmMakerDTO filmMakerDTO, long id)
         {
-            var genre = await _filmMakerService.UpdateAsync(filmMakerDTO, id);
+            var filmMaker = await _filmMakerService.UpdateAsync(filmMakerDTO, id);
 
-            return Ok(genre);
+            return Ok(filmMaker);
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(long id)
         {
-            var genre = await _filmMakerService.DeleteAsync(id);
+            var filmMaker = await _filmMakerService.DeleteAsync(id);
 
-            return Ok(genre);
+            return Ok(filmMaker);
         }
     }
 }

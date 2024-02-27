@@ -11,7 +11,7 @@ namespace AsilMedia.Application.Services.FilmMakers
         public FilmMakerService(IFilmMakerRepository filmMakerRepository)
             => _filmMakerRepository = filmMakerRepository;
 
-        public Task<FilmMaker> InsertAsync(FilmMakerDTO filmMakerDTO)
+        public async Task<FilmMaker> InsertAsync(FilmMakerDTO filmMakerDTO)
         {
             var filmMaker = new FilmMaker()
             {
@@ -21,12 +21,13 @@ namespace AsilMedia.Application.Services.FilmMakers
                 Gender = filmMakerDTO.Gender,
                 PhotoPath = filmMakerDTO.PhotoPath,
             };
-            var res = _filmMakerRepository.InsertAsync(filmMaker);
+
+            var res = await _filmMakerRepository.InsertAsync(filmMaker);
             return res;
         }
 
-public async Task<List<FilmMaker>> SelectAllAsync()
-    => await _filmMakerRepository.SelectAllAsync();
+        public async Task<List<FilmMaker>> SelectAllAsync()
+            => await _filmMakerRepository.SelectAllAsync();
 
 
         public async Task<FilmMaker> SelectByIdAsync(long id)
