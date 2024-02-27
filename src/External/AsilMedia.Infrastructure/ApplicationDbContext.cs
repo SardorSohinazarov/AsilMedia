@@ -1,4 +1,4 @@
-﻿using AsilMedia.Domain.Entities;
+using AsilMedia.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace AsilMedia.Infrastructure1

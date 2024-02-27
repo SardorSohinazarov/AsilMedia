@@ -1,4 +1,3 @@
-﻿using AsilMedia.Domain.Entities;
 using AsilMedia.Domain.Enums;
 
 namespace AsilMedia.Application.DataTransferObjects

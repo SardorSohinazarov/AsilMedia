@@ -1,4 +1,4 @@
-﻿using AsilMedia.Application.Abstractions.Repositories;
+using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Domain.Entities;
 using AsilMedia.Domain.Exceptions.Actors;
 using AsilMedia.Infrastructure1;
@@ -26,12 +26,12 @@ namespace AsilMedia.Infrastructure.Repositories
 
         public async Task<Actor> SelectByIdAsync(long id)
         {
-            var storedActor = await _dbContext.Actors.FirstOrDefaultAsync(x => x.Id == id);
+            var storedFilm = await _dbContext.Actors.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (storedActor is null)
-                throw new ActorNotFoundException();
+            if (storedFilm is null)
+                throw new FilmNotFoundException();
 
-            return storedActor;
+            return storedFilm;
         }
 
         public async Task<Actor> UpdateAsync(Actor actor, long id)
@@ -50,14 +50,14 @@ namespace AsilMedia.Infrastructure.Repositories
             return entry.Entity;
         }
 
-        public async Task<Actor> DeleteAsync(long id)
+        public async Task<Film> DeleteAsync(long id)
         {
-            var storedActor = await _dbContext.Actors.FirstOrDefaultAsync(x => x.Id == id);
+            var storedFilm = await _dbContext.Films.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (storedActor is null)
-                throw new ActorNotFoundException();
+            if (storedFilm is null)
+                throw new FilmNotFoundException();
 
-            var entry = _dbContext.Remove(storedActor);
+            var entry = _dbContext.Remove(storedFilm);
             await _dbContext.SaveChangesAsync();
 
             return entry.Entity;
