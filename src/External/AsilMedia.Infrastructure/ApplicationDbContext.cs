@@ -1,4 +1,4 @@
-﻿using AsilMedia.Domain.Entities;
+using AsilMedia.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace AsilMedia.Infrastructure1
@@ -10,6 +10,8 @@ namespace AsilMedia.Infrastructure1
             => Database.Migrate();
 
         public DbSet<Film> Films { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<FilmMaker> FilmMakers { get; set; }
         public DbSet<Actor> Actors { get; set; }
     }
 }

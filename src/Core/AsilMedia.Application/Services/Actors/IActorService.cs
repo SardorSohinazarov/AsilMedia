@@ -1,6 +1,5 @@
-﻿using AsilMedia.Application.DataTransferObjects;
+using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Domain.Entities;
-
 
 namespace AsilMedia.Application.Services.Actors
 {

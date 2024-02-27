@@ -1,20 +1,21 @@
-﻿using AsilMedia.Domain.Entities;
+using AsilMedia.Application.Abstractions.Repositories;
+using AsilMedia.Domain.Entities;
+using AsilMedia.Domain.Exceptions.Actors;
 using AsilMedia.Infrastructure1;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace AsilMedia.Infrastructure.Repositories
 {
-    public class ActorRepository
+    public class ActorRepository : IActorRepository
     {
         private readonly ApplicationDbContext _dbContext;
-
         public ActorRepository(ApplicationDbContext dbContext)
             => _dbContext = dbContext;
 
-        public async Task<Actor> InsertAsync(Actor acotr)
+        public async Task<Actor> InsertAsync(Actor actor)
         {
-            EntityEntry<Actor> entry = await _dbContext.AddAsync(acotr);
+            EntityEntry<Actor> entry = await _dbContext.AddAsync(actor);
             await _dbContext.SaveChangesAsync();
 
             return entry.Entity;
@@ -33,19 +34,17 @@ namespace AsilMedia.Infrastructure.Repositories
             return storedFilm;
         }
 
-        public async Task<Film> UpdateAsync(ActorDTO actor, long id)
+        public async Task<Actor> UpdateAsync(Actor actor, long id)
         {
-            var storedFilm = await _dbContext.Actors.FirstOrDefaultAsync(x => x.Id == id);
+            var storedActor = await _dbContext.Actors.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (storedFilm is null)
-                throw new FilmNotFoundException();
+            if (storedActor is null)
+                throw new ActorNotFoundException();
 
-            //mapping
-            storedFilm.FirstName = actor.FirstName;
-            storedFilm. = actor.Description;
-            ///...
+            storedActor.FirstName = actor.FirstName;
+            storedActor.LastName = actor.LastName;
 
-            var entry = _dbContext.Update(storedFilm);
+            var entry = _dbContext.Update(storedActor);
             await _dbContext.SaveChangesAsync();
 
             return entry.Entity;
