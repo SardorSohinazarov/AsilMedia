@@ -15,7 +15,7 @@ namespace AsilMedia.Infrastructure1.Repositories
 
         public async Task<Film> InsertAsync(Film film)
         {
-            EntityEntry<Film> entry = await _dbContext.AddAsync(film);
+            EntityEntry<Film> entry = await _dbContext.Films.AddAsync(film);
             await _dbContext.SaveChangesAsync();
 
             return entry.Entity;
@@ -46,7 +46,7 @@ namespace AsilMedia.Infrastructure1.Repositories
             storedFilm.Description = film.Description;
             ///...
 
-            var entry = _dbContext.Update(storedFilm);
+            var entry = _dbContext.Films.Update(storedFilm);
             await _dbContext.SaveChangesAsync();
 
             return entry.Entity;
