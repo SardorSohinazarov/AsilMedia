@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AsilMedia.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/action")]
     [ApiController]
     public class FilmController : ControllerBase
     {
