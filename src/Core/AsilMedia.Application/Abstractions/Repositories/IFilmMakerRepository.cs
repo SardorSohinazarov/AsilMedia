@@ -1,4 +1,4 @@
-﻿using AsilMedia.Domain.Entities;
+using AsilMedia.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,10 @@ namespace AsilMedia.Application.Abstractions.Repositories
 {
     public interface IFilmMakerRepository
     {
-        public Task<FilmMaker> InsertAsync(FilmMaker film);
+        public Task<FilmMaker> InsertAsync(FilmMaker filmMaker);
         public Task<FilmMaker> SelectByIdAsync(long id);
         public Task<List<FilmMaker>> SelectAllAsync();
-        public Task<FilmMaker> UpdateAsync(FilmMaker film, long id);
+        public Task<FilmMaker> UpdateAsync(FilmMaker filmMaker, long id);
         public Task<FilmMaker> DeleteAsync(long id);
     }
 }
