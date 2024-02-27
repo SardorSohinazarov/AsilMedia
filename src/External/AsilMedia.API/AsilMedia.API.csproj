@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\AsilMedia.Application\AsilMedia.Application.csproj" />
     <ProjectReference Include="..\AsilMedia.Infrastructure\AsilMedia.Infrastructure.csproj" />
   </ItemGroup>
 
