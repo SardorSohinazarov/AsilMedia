@@ -1,7 +1,7 @@
 ﻿using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Domain.Entities;
 using AsilMedia.Domain.Exceptions.Genres;
-using AsilMedia.Infrastructure1;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -27,7 +27,9 @@ namespace AsilMedia.Infrastructure.Repositories
 
         public async Task<Genre> SelectByIdAsync(long id)
         {
-            var model = await _dbContext.Genres.FirstOrDefaultAsync(x => x.Id == id);
+            var model = await _dbContext.Genres
+                .IgnoreQueryFilters()
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (model is null)
                 throw new GenreNotFoundException();
@@ -52,12 +54,17 @@ namespace AsilMedia.Infrastructure.Repositories
 
         public async Task<Genre> DeleteAsync(long id)
         {
-            var storedGenre = await _dbContext.Genres.FirstOrDefaultAsync(x => x.Id == id);
+            Genre? storedGenre = await _dbContext.Genres.FirstOrDefaultAsync(x => x.Id == id);
 
             if (storedGenre is null)
                 throw new GenreNotFoundException();
 
-            var entry = _dbContext.Remove(storedGenre);
+            storedGenre.IsDeleted = true;
+            storedGenre.DeletedDateTime = DateTime.UtcNow;
+
+            var entry = _dbContext.Update(storedGenre);
+
+            //var entry = _dbContext.Remove(storedGenre);
             await _dbContext.SaveChangesAsync();
 
             return entry.Entity;

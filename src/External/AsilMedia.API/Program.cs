@@ -1,10 +1,12 @@
+using System.Text.Json.Serialization;
+
 using AsilMedia.Application;
 using AsilMedia.Application.Abstractions.Repositories;
+using AsilMedia.Infrastructure;
 using AsilMedia.Infrastructure.Repositories;
-using AsilMedia.Infrastructure1;
 using AsilMedia.Infrastructure1.Repositories;
+
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 

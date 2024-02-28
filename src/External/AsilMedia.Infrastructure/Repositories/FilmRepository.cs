@@ -2,6 +2,8 @@
 using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Domain.Entities;
 using AsilMedia.Domain.Exceptions.Films;
+using AsilMedia.Infrastructure;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
