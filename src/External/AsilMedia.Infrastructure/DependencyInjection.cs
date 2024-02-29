@@ -1,4 +1,5 @@
-﻿using AsilMedia.Application.Abstractions.Repositories;
+﻿using AsilMedia.Application.Abstractions;
+using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Infrastructure.Repositories;
 using AsilMedia.Infrastructure1.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,13 +14,15 @@ namespace AsilMedia.Infrastructure1
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("Postgress")));
 
             services.AddScoped<IFilmRepository, FilmRepository>();
             services.AddScoped<IGenreRepository, GenreRespoitory>();
             services.AddScoped<IActorRepository, ActorRepository>();
             services.AddScoped<IFilmMakerRepository, FilmMakerRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }
