@@ -1,9 +1,8 @@
 using AsilMedia.Application;
-using AsilMedia.Application.Abstractions.Repositories;
-using AsilMedia.Infrastructure.Repositories;
 using AsilMedia.Infrastructure1;
-using AsilMedia.Infrastructure1.Repositories;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,15 +17,27 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddApplicationServices();
+builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectPostgres")));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(
+        options =>
+        {
+            options.TokenValidationParameters = GetTokenValidationParameters(builder.Configuration);
 
-builder.Services.AddScoped<IFilmRepository, FilmRepository>();
-builder.Services.AddScoped<IGenreRepository, GenreRespoitory>();
-builder.Services.AddScoped<IFilmMakerRepository, FilmMakerRepository>();
-builder.Services.AddScoped<IActorRepository, ActorRepository>();
+            options.Events = new JwtBearerEvents
+            {
+                OnAuthenticationFailed = (context) =>
+                {
+                    if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                    {
+                        context.Response.Headers.Add("IsTokenExpired", "true");
+                    }
+                    return Task.CompletedTask;
+                }
+            };
+        });
 
 var app = builder.Build();
 
@@ -41,3 +52,19 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+static TokenValidationParameters GetTokenValidationParameters(IConfiguration configuration)
+{
+    return new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidIssuer = configuration["JWT:ValidIssuer"],
+        ValidateAudience = true,
+        ValidAudience = configuration["JWT:ValidAudience"],
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"])),
+        ClockSkew = TimeSpan.Zero,
+    };
+}

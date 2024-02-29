@@ -1,5 +1,6 @@
 ﻿using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Application.Services.Films;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsilMedia.API.Controllers
@@ -22,6 +23,7 @@ namespace AsilMedia.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> FilmGetAllAsync()
         {
             var films = await _filmService.SelectAllAsync();
