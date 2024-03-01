@@ -23,11 +23,17 @@ namespace AsilMedia.Application.Halpers.JWTServices
 
             var exDate = Convert.ToInt32(_configuration["JWT:ExpireDate"] ?? "10");
 
+            var permissions = user.Role.Permissions;
+
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Role, user.Role.Name),
-                new Claim("Sardor", "Sohinazarov"),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
+
+            foreach (var permission in permissions)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, permission.Name));
+            }
 
             var token = new JwtSecurityToken(
                 issuer: _configuration["JWT:ValidIssuer"],
