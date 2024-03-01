@@ -1,4 +1,5 @@
-﻿using AsilMedia.Application.Services.Roles;
+﻿using AsilMedia.Application.DataTransferObjects;
+using AsilMedia.Application.Services.Roles;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsilMedia.API.Controllers
@@ -13,9 +14,9 @@ namespace AsilMedia.API.Controllers
             => _roleService = roleService;
 
         [HttpPost]
-        public async Task<IActionResult> PostRoleAsync(string name)
+        public async Task<IActionResult> PostRoleAsync(RoleDTO roleDTO)
         {
-            var role = await _roleService.InsertAsync(name);
+            var role = await _roleService.InsertAsync(roleDTO);
 
             return Ok(role);
         }
