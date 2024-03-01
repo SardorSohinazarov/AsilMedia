@@ -11,6 +11,7 @@ namespace AsilMedia.Application.Abstractions
         public DbSet<Actor> Actors { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
 
         public ValueTask<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
