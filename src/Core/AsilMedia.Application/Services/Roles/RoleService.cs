@@ -1,4 +1,6 @@
-﻿using AsilMedia.Application.Abstractions.Repositories;
+﻿using AsilMedia.Application.Abstractions;
+using AsilMedia.Application.Abstractions.Repositories;
+using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Domain.Entities;
 
 namespace AsilMedia.Application.Services.Roles
@@ -6,20 +8,26 @@ namespace AsilMedia.Application.Services.Roles
     public class RoleService : IRoleService
     {
         private readonly IRoleRepository _roleRepository;
+        private readonly IPermissionRepository _permissionRepository;
 
-        public RoleService(IRoleRepository roleRepository)
-            => _roleRepository = roleRepository;
+        public RoleService(IRoleRepository roleRepository, IPermissionRepository permissionRepository)
+        {
+            _roleRepository = roleRepository;
+            _permissionRepository = permissionRepository;
+        }
 
         public Task<Role> DeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Role> InsertAsync(string name)
+        public async Task<Role> InsertAsync(RoleDTO roleDTO)
         {
+            var permissions = await _permissionRepository.SelectAllAsync(roleDTO.Permissions);
             var role = new Role()
             {
-                Name = name
+                Name = roleDTO.Name,
+                Permissions = permissions
             };
 
             role = await _roleRepository.InsertAsync(role);
