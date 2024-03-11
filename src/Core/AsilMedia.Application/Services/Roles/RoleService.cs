@@ -2,6 +2,7 @@
 using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Domain.Entities;
+using Mapster;
 
 namespace AsilMedia.Application.Services.Roles
 {
@@ -25,11 +26,7 @@ namespace AsilMedia.Application.Services.Roles
         {
             var permissions = await _permissionRepository.SelectAllAsync(roleDTO.Permissions);
 
-            var role = new Role()
-            {
-                Name = roleDTO.Name,
-                Permissions = permissions
-            };
+            var role = roleDTO.Adapt<Role>();
 
             role = await _roleRepository.InsertAsync(role);
 

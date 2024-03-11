@@ -1,4 +1,4 @@
-﻿using AsilMedia.Application.Abstractions.Repositories;
+using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Domain.Entities;
 using Mapster;
@@ -9,7 +9,7 @@ namespace AsilMedia.Application.Services.FilmMakers
     {
         private readonly IFilmMakerRepository _filmMakerRepository;
 
-        public FilmMakerService(IFilmMakerRepository filmMakerRepository)
+        public FilmMakerService(IFilmMakerRepository filmMakerRepository) 
             => _filmMakerRepository = filmMakerRepository;
 
         public async Task<FilmMaker> InsertAsync(FilmMakerDTO filmMakerDTO)
