@@ -24,6 +24,7 @@ namespace AsilMedia.Application.Services.Roles
         public async Task<Role> InsertAsync(RoleDTO roleDTO)
         {
             var permissions = await _permissionRepository.SelectAllAsync(roleDTO.Permissions);
+
             var role = new Role()
             {
                 Name = roleDTO.Name,

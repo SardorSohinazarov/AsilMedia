@@ -1,6 +1,5 @@
 ﻿using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Application.Services.Actors;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsilMedia.API.Controllers
@@ -15,7 +14,6 @@ namespace AsilMedia.API.Controllers
             => _actorService = actorService;
 
         [HttpPost]
-        [Authorize(Roles = "CreateActor")]
         public async Task<IActionResult> PostAsync(ActorDTO actorDTO)
         {
             var actor = await _actorService.InsertAsync(actorDTO);
