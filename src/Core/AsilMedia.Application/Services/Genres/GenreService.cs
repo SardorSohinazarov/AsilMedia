@@ -1,6 +1,7 @@
 ﻿using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Domain.Entities;
+using Mapster;
 
 namespace AsilMedia.Application.Services.Genres
 {
@@ -13,10 +14,7 @@ namespace AsilMedia.Application.Services.Genres
 
         public async Task<Genre> InsertAsync(GenreDTO genreDTO)
         {
-            var genre = new Genre()
-            {
-                Name = genreDTO.Name
-            };
+            var genre = genreDTO.Adapt<Genre>();
 
             genre = await _genreRepository.InsertAsync(genre);
 
