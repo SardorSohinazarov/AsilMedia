@@ -1,9 +1,8 @@
-﻿using AsilMedia.Application.Abstractions.Repositories;
+using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Application.Halpers.JWTServices;
 using AsilMedia.Domain.Entities;
 using Mapster;
-using System.Data;
 
 namespace AsilMedia.Application.Services.Users
 {
