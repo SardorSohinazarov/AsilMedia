@@ -10,7 +10,7 @@ namespace AsilMedia.Application.Services.FilmMakers
     {
         private readonly IFilmMakerRepository _filmMakerRepository;
 
-        public FilmMakerService(IFilmMakerRepository filmMakerRepository)
+        public FilmMakerService(IFilmMakerRepository filmMakerRepository) 
             => _filmMakerRepository = filmMakerRepository;
 
         public async Task<FilmMaker> InsertAsync(FilmMakerDTO filmMakerDTO)
