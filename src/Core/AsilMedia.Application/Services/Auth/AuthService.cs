@@ -3,6 +3,7 @@ using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Application.Halpers.JWTServices;
 using AsilMedia.Domain.Entities;
 using AsilMedia.Domain.Exceptions.Users;
+using Mapster;
 
 namespace AsilMedia.Application.Services.Auth
 {
@@ -35,15 +36,7 @@ namespace AsilMedia.Application.Services.Auth
 
         public async Task<string> RegisterServiceAsync(RegisterDTO registerDTO)
         {
-            var user = new User()
-            {
-                Name = registerDTO.Name,
-                Email = registerDTO.Email,
-                //hash
-                PasswordHash = registerDTO.Password,
-                RoleId = registerDTO.RoleId,
-                RefreshToken = registerDTO.RefreshToken,
-            };
+            var user = registerDTO.Adapt<User>();
 
             user = await _userRepository.InsertAsync(user);
             var role = await _roleRepository.SelectByIdAsync(user.RoleId);
