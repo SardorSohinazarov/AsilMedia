@@ -36,7 +36,7 @@ namespace AsilMedia.Application.Services.Genres
         public async Task<Genre> DeleteAsync(long id)
         {
             var genre = await _genreRepository.DeleteAsync(id);
-
+            Console.WriteLine("sd");
             return genre;
         }
     }
