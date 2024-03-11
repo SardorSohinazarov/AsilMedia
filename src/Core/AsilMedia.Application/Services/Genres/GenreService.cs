@@ -1,6 +1,7 @@
 ﻿using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Domain.Entities;
+using Mapster;
 
 namespace AsilMedia.Application.Services.Genres
 {
@@ -13,14 +14,9 @@ namespace AsilMedia.Application.Services.Genres
 
         public async Task<Genre> InsertAsync(GenreDTO genreDTO)
         {
-            var genre = new Genre()
-            {
-                Name = genreDTO.Name
-            };
+            var genre = genreDTO.Adapt<Genre>();
 
-            genre = await _genreRepository.InsertAsync(genre);
-
-            return genre;
+            return await _genreRepository.InsertAsync(genre);
         }
 
         public async Task<List<Genre>> SelectAllAsync()
@@ -31,14 +27,10 @@ namespace AsilMedia.Application.Services.Genres
 
         public async Task<Genre> UpdateAsync(GenreDTO genreDTO, long id)
         {
-            var genre = new Genre()
-            {
-                Name = genreDTO.Name
-            };
+           
+            var filmMArker = genreDTO.Adapt<Genre>();
 
-            var gerne = await _genreRepository.UpdateAsync(genre, id);
-
-            return genre;
+            return await _genreRepository.UpdateAsync(filmMArker, id);
         }
 
         public async Task<Genre> DeleteAsync(long id)
