@@ -10,9 +10,9 @@ namespace AsilMedia.Application.Services.Permissions
         public PermissionService(IPermissionRepository permissionRepository)
             => _permissionRepository = permissionRepository;
 
-        public Task<Permission> DeleteAsync(long id)
+        public async Task<Permission> DeleteAsync(long id)
         {
-            throw new NotImplementedException();
+            return await _permissionRepository.DeleteAsync(id);
         }
 
         public async Task<Permission> InsertAsync(string name)
