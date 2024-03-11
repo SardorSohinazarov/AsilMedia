@@ -14,10 +14,7 @@ namespace AsilMedia.Application.Services.Genres
 
         public async Task<Genre> InsertAsync(GenreDTO genreDTO)
         {
-            var genre = new Genre()
-            {
-                Name = genreDTO.Name
-            };
+            var genre = genreDTO.Adapt<Genre>();
 
             genre = await _genreRepository.InsertAsync(genre);
 
