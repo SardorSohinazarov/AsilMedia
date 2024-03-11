@@ -3,6 +3,7 @@ using System;
 using AsilMedia.Infrastructure1;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AsilMedia.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240301035858_Permissions-Table")]
+    partial class PermissionsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,9 +191,14 @@ namespace AsilMedia.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<long?>("RoleId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Permissions");
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Permission");
                 });
 
             modelBuilder.Entity("AsilMedia.Domain.Entities.Role", b =>
@@ -269,21 +277,6 @@ namespace AsilMedia.Infrastructure.Migrations
                     b.ToTable("FilmGenre");
                 });
 
-            modelBuilder.Entity("PermissionRole", b =>
-                {
-                    b.Property<long>("PermissionsId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("RolesId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("PermissionsId", "RolesId");
-
-                    b.HasIndex("RolesId");
-
-                    b.ToTable("PermissionRole");
-                });
-
             modelBuilder.Entity("ActorFilm", b =>
                 {
                     b.HasOne("AsilMedia.Domain.Entities.Actor", null)
@@ -308,6 +301,13 @@ namespace AsilMedia.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("FilmMaker");
+                });
+
+            modelBuilder.Entity("AsilMedia.Domain.Entities.Permission", b =>
+                {
+                    b.HasOne("AsilMedia.Domain.Entities.Role", null)
+                        .WithMany("Permissions")
+                        .HasForeignKey("RoleId");
                 });
 
             modelBuilder.Entity("AsilMedia.Domain.Entities.User", b =>
@@ -336,21 +336,6 @@ namespace AsilMedia.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PermissionRole", b =>
-                {
-                    b.HasOne("AsilMedia.Domain.Entities.Permission", null)
-                        .WithMany()
-                        .HasForeignKey("PermissionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AsilMedia.Domain.Entities.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("AsilMedia.Domain.Entities.FilmMaker", b =>
                 {
                     b.Navigation("Films");
@@ -358,6 +343,8 @@ namespace AsilMedia.Infrastructure.Migrations
 
             modelBuilder.Entity("AsilMedia.Domain.Entities.Role", b =>
                 {
+                    b.Navigation("Permissions");
+
                     b.Navigation("Users");
                 });
 #pragma warning restore 612, 618

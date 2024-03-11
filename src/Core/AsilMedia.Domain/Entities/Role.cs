@@ -6,6 +6,7 @@ namespace AsilMedia.Domain.Entities
     {
         public string Name { get; set; }
 
+        public List<Permission> Permissions { get; set; }
         public List<User> Users { get; set; }
     }
 }

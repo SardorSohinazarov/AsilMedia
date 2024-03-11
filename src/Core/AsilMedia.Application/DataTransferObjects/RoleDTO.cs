@@ -2,6 +2,8 @@
 {
     public class RoleDTO
     {
-        string Name { get; set; }
+        public string Name { get; set; }
+
+        public List<long> Permissions { get; set; }
     }
 }

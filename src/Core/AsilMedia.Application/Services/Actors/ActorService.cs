@@ -1,6 +1,7 @@
 ﻿using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Domain.Entities;
+using Mapster;
 
 namespace AsilMedia.Application.Services.Actors
 {
@@ -22,30 +23,15 @@ namespace AsilMedia.Application.Services.Actors
 
         public async Task<Actor> InsertAsync(ActorDTO actorDTO)
         {
-            Actor actor = new Actor
-            {
-                FirstName = actorDTO.FirstName,
-                LastName = actorDTO.LastName,
-                Description = actorDTO.Description,
-                PhotoPath = actorDTO.PhotoPath,
-                Gender = actorDTO.Gender
-
-            };
+            var actor = actorDTO.Adapt<Actor>();
 
             return await _actorRepository.InsertAsync(actor);
         }
 
         public async Task<Actor> UpdateAsync(ActorDTO actorDTO, long id)
         {
-            Actor actor = new Actor
-            {
-                FirstName = actorDTO.FirstName,
-                LastName = actorDTO.LastName,
-                Description = actorDTO.Description,
-                PhotoPath = actorDTO.PhotoPath,
-                Gender = actorDTO.Gender
+            var actor = actorDTO.Adapt<Actor>();
 
-            };
             return await _actorRepository.UpdateAsync(actor, id);
         }
     }

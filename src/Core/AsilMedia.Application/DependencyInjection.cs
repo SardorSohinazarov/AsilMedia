@@ -1,8 +1,10 @@
 ﻿using AsilMedia.Application.Halpers.JWTServices;
 using AsilMedia.Application.Services.Actors;
+using AsilMedia.Application.Services.Auth;
 using AsilMedia.Application.Services.FilmMakers;
 using AsilMedia.Application.Services.Films;
 using AsilMedia.Application.Services.Genres;
+using AsilMedia.Application.Services.Permissions;
 using AsilMedia.Application.Services.Roles;
 using AsilMedia.Application.Services.Users;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +23,8 @@ namespace AsilMedia.Application
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJWTService, JWTService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IPermissionService, PermissionService>();
 
             return services;
         }

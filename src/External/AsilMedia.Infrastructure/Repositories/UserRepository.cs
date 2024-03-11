@@ -37,6 +37,11 @@ namespace AsilMedia.Infrastructure.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<User> SelectByIdAsync(string passwordHash, string email)
+            => await _context.Users
+                .Include(x => x.Role)
+                .FirstOrDefaultAsync(x => x.PasswordHash == passwordHash && x.Email == email);
+
         public Task<User> UpdateAsync(User user, long id)
         {
             throw new NotImplementedException();
