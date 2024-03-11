@@ -41,13 +41,7 @@ namespace AsilMedia.Application.Services.Films
 
         public async Task<Film> UpdateAsync(FilmDTO filmDTO, long id)
         {
-            var film = new Film()
-            {
-                Title = filmDTO.Title,
-                AgeRestriction = filmDTO.AgeRestriction,
-
-                ///...
-            };
+            var film = filmDTO.Adapt<Film>();
 
             return await _filmRepository.UpdateAsync(film, id);
         }
