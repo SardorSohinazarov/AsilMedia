@@ -1,4 +1,4 @@
-﻿using AsilMedia.Application.Abstractions.Repositories;
+using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Application.Halpers.JWTServices;
 using AsilMedia.Domain.Entities;
@@ -44,9 +44,12 @@ namespace AsilMedia.Application.Services.Users
         public async Task<User> SelectByIdAsync(long id)
             => await _userRepository.SelectByIdAsync(id);
 
-        public Task<User> UpdateAsync(UserDTO userDTO, long id)
+        public async Task<User> UpdateAsync(UserDTO userDTO, long id)
         {
-            throw new NotImplementedException();
+          
+            var user =userDTO.Adapt<User>();
+            var result = await _userRepository.UpdateAsync(user,id);
+            return result;
         }
     }
 }

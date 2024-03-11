@@ -29,10 +29,7 @@ namespace AsilMedia.Application.Services.Genres
 
         public async Task<Genre> UpdateAsync(GenreDTO genreDTO, long id)
         {
-            var genre = new Genre()
-            {
-                Name = genreDTO.Name
-            };
+            var genre = genreDTO.Adapt<Genre>();
 
             var gerne = await _genreRepository.UpdateAsync(genre, id);
 

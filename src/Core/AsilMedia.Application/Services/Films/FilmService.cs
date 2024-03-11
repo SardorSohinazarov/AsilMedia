@@ -1,6 +1,7 @@
 ﻿using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Domain.Entities;
+using Mapster;
 
 namespace AsilMedia.Application.Services.Films
 {
@@ -25,19 +26,7 @@ namespace AsilMedia.Application.Services.Films
             var actors = await _actorRepository.SelectAllAsync(filmDTO.Actors);
             var genres = await _genreRepository.SelectAllAsync(filmDTO.Genres);
 
-            var film = new Film()
-            {
-                Title = filmDTO.Title,
-                AgeRestriction = filmDTO.AgeRestriction,
-                Description = filmDTO.Description,
-                FilmMakerId = filmDTO.FilmMakerId,
-                VideoPath = filmDTO.VideoPath,
-                PhotoPath = filmDTO.PhotoPath,
-                PublishedYear = filmDTO.PublishedYear,
-
-                Actors = actors,
-                Genres = genres
-            };
+            var film = filmDTO.Adapt<Film>();
 
             film = await _filmRepository.InsertAsync(film);
 
@@ -52,14 +41,7 @@ namespace AsilMedia.Application.Services.Films
 
         public async Task<Film> UpdateAsync(FilmDTO filmDTO, long id)
         {
-            var film = new Film()
-            {
-                Title = filmDTO.Title,
-                AgeRestriction = filmDTO.AgeRestriction,
-
-                ///...
-            };
-
+            var film = filmDTO.Adapt<Film>();
             return await _filmRepository.UpdateAsync(film, id);
         }
 
