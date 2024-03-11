@@ -37,6 +37,12 @@ namespace AsilMedia.Application.Services.Genres
         {
             var genre = await _genreRepository.DeleteAsync(id);
             Console.WriteLine("sd");
+            Console.WriteLine("sd");
+            Console.WriteLine("sd");
+            Console.WriteLine("sd");
+            Console.WriteLine("sd");
+            Console.WriteLine("sd");
+            Console.WriteLine("sd");
             return genre;
         }
     }
