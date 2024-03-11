@@ -26,6 +26,9 @@ namespace AsilMedia.Application
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IPermissionService, PermissionService>();
 
+
+
+
             return services;
         }
     }
