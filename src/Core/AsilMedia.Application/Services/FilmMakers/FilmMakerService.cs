@@ -1,8 +1,7 @@
-﻿using AsilMedia.Application.Abstractions.Repositories;
+using AsilMedia.Application.Abstractions.Repositories;
 using AsilMedia.Application.DataTransferObjects;
 using AsilMedia.Domain.Entities;
 using Mapster;
-
 
 namespace AsilMedia.Application.Services.FilmMakers
 {
@@ -30,14 +29,7 @@ namespace AsilMedia.Application.Services.FilmMakers
 
         public Task<FilmMaker> UpdateAsync(FilmMakerDTO filmMakerDTO, long id)
         {
-            var filmMaker = new FilmMaker()
-            {
-                FirstName = filmMakerDTO.FirstName,
-                LastName = filmMakerDTO.LastName,
-                Description = filmMakerDTO.Description,
-                Gender = filmMakerDTO.Gender,
-                PhotoPath = filmMakerDTO.PhotoPath,
-            };
+            var filmMaker = filmMakerDTO.Adapt<FilmMaker>();
             var res = _filmMakerRepository.UpdateAsync(filmMaker, id);
             return res;
         }
