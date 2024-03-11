@@ -42,7 +42,6 @@ namespace AsilMedia.Application.Services.Films
         public async Task<Film> UpdateAsync(FilmDTO filmDTO, long id)
         {
             var film = filmDTO.Adapt<Film>();
-
             return await _filmRepository.UpdateAsync(film, id);
         }
 
