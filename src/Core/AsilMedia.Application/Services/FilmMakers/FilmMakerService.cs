@@ -24,6 +24,7 @@ namespace AsilMedia.Application.Services.FilmMakers
             => await _filmMakerRepository.SelectAllAsync();
 
 
+
         public async Task<FilmMaker> SelectByIdAsync(long id)
             => await _filmMakerRepository.SelectByIdAsync(id);
 
