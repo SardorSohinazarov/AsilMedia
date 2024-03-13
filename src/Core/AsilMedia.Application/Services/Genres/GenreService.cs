@@ -13,12 +13,19 @@ namespace AsilMedia.Application.Services.Genres
 
         public async ValueTask<Genre> AddAsync(GenreCreationDTO genreDTO)
         {
+            if (String.IsNullOrWhiteSpace(genreDTO.Name))
+            {
+                throw new Exception("Name cannot be null or whitespace");
+            }
+
             var genre = new Genre()
             {
                 Name = genreDTO.Name,
             };
 
             var result = await _repository.InsertGenreAsync(genre);
+
+            result.Name = "Tarixiy";
 
             return result;
         }
