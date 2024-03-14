@@ -46,10 +46,9 @@ namespace AsilMedia.Application.Services.Users
 
         public async Task<User> UpdateAsync(UserDTO userDTO, long id)
         {
-          
-            var user =userDTO.Adapt<User>();
-            var result = await _userRepository.UpdateAsync(user,id);
-            return result;
+            var user = userDTO.Adapt<User>();
+
+            return await _userRepository.UpdateAsync(user, id);
         }
     }
 }
